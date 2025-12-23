@@ -1,19 +1,16 @@
+---
 name: Deploy Hugo Site to Pages
-
 on:
   push:
     branches:
-      - hugo  # 当向 hugo 分支推送代码时触发
-
+      - hugo
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,30 +18,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive # 重要：拉取主题子模块
+          submodules: recursive
           fetch-depth: 0
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: latest
           extended: true
-
       - name: Build
         run: hugo --minify
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-
   deploy:
     environment:
       name: github-pages
-          url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
