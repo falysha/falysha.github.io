@@ -1,0 +1,26 @@
+baseURL = "https://falysha.github.io/" # 你的网站地址
+languageCode = "zh-cn"
+title = "Falysha's Blog" # 你的网站标题
+theme = "PaperMod" # 主题名称
+
+[params]
+  # 主题相关参数
+  defaultTheme = "auto" # 自动切换亮色/暗色模式
+  ShowShareButtons = true
+  ShowReadingTime = true
+
+[menu]
+  # 导航菜单配置，可以先留空或简单配置
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 20
+
+# 启用Google Analytics（如果需要）
+# googleAnalytics = "G-XXXXXXXXXX"
